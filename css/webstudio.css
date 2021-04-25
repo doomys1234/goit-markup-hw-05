@@ -7,6 +7,7 @@ html {
   box-sizing: inherit;
 }
 :root {
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   --main-text-color: #212121;
   --text-color: #757575;
   --accent-color: #2196f3;
@@ -71,6 +72,7 @@ a {
 }
 
 .nav-link {
+  position: relative;
   display: block;
   padding-top: 32px;
   padding-bottom: 32px;
@@ -78,7 +80,21 @@ a {
   font-weight: 500;
   font-size: 14px;
   line-height: 1.14;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+.current::after {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent-color);
+}
+
 .nav-link:hover,
 .nav-link:focus {
   color: var(--accent-color);
@@ -98,6 +114,8 @@ a {
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .icon-envelope {
@@ -311,6 +329,8 @@ a {
 
   border-radius: 50px;
   color: var(--icon-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .icon {
   width: 20px;
@@ -344,6 +364,8 @@ a {
   border: 1px solid #afb1b8;
   border-radius: 4px;
   color: var(--icon-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .clients-link:hover,
 .clients-link:focus {
@@ -453,6 +475,8 @@ a {
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffff;
   border-radius: 50px;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .footer-link:hover,
 .footer-link:focus {
@@ -478,15 +502,16 @@ a {
   color: var(--main-text-color);
   background-color: var(--background-color);
 }
+.button-item + .button-item {
+  margin-left: 8px;
+}
 .button {
   padding: 6px 22px;
   border: 1px transparent;
   border-radius: 4px;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.button-item + .button-item {
-  margin-left: 8px;
-}
-
 .button:hover,
 .button:focus {
   background-color: var(--accent-color);
@@ -507,7 +532,7 @@ a {
   margin-right: 30px;
   margin-bottom: 30px;
   width: calc((100% - 60px) / 3);
-
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
   border-bottom: 1px solid #eeeeee;
 }
 .portfolio-item:hover,
@@ -515,6 +540,7 @@ a {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
+
 .portfolio-card {
   padding-top: 20px;
   padding-left: 24px;
@@ -549,6 +575,7 @@ a {
 }
 .portfolio-thumb {
   position: relative;
+  overflow: hidden;
 }
 .portfolio-thumb::before {
   content: "";
@@ -556,16 +583,10 @@ a {
   display: inline-block;
   width: 100%;
   height: 100%;
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: rgba(33, 150, 243, 0.9);
-  opacity: 0;
 }
-.portfolio-item:hover .sub-thumb {
-  opacity: 1;
-}
-.portfolio-item:hover .portfolio-thumb::before {
-  opacity: 1;
-}
-
 .sub-thumb {
   position: absolute;
   padding-top: 63px;
@@ -573,17 +594,24 @@ a {
   padding-right: 24px;
   padding-bottom: 63px;
   width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
+  top: 0px;
+  left: 0px;
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .sub-text {
   margin: 0px;
   font-size: 18px;
   line-height: 1.55;
   color: #ffff;
+}
+.portfolio-link:focus .sub-thumb,
+.portfolio-link:hover .sub-thumb {
+  transform: translateY(0);
+}
+.portfolio-link:hover .portfolio-thumb::before,
+.portfolio-link:focus .portfolio-thumb::before {
+  transform: translateY(0);
 }
 /* FOOTER */
 .second {
@@ -598,6 +626,7 @@ a {
   left: 0px;
   width: 100%;
   height: 100%;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: rgba(0, 0, 0, 0.2);
 }
 .modal {
